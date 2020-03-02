@@ -1,2 +1,2 @@
 # librarySystem
-This project is not for commercial use
+This project is not for commercial use.
