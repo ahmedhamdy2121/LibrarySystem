@@ -5,8 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class GenericDAOImpl<T> implements GenericDAO<T> {
+	
+	private T t;
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("ls");
 	private static EntityManager em = factory.createEntityManager();
@@ -15,24 +18,23 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		em.persist(t);
 	}
 
-	public boolean update(int index, T t) {
-		// TODO Auto-generated method stub
-		return false;
+	public void update(int index, T t) {
+		em.merge(t);
 	}
 
-	public boolean remove(int index) {
-		// TODO Auto-generated method stub
-		return false;
+	public void remove(int index) {
+		em.remove(getByIndex(index));
 	}
 
 	public T getByIndex(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return (T) em.find(t.getClass(), index);
 	}
 
 	public List<T> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT e FROM "
+				+ t.getClass()
+				+ " e");
+	    return query.getResultList();
 	}
 
 	public void apply(TransactionManager tManager) {

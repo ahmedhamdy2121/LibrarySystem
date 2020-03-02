@@ -8,9 +8,9 @@ public interface GenericDAO<T> {
 
 	public void add(T t);
 
-	public boolean update(int index, T t);
+	public void update(int index, T t);
 
-	public boolean remove(int index);
+	public void remove(int index);
 
 	public T getByIndex(int index);
 
