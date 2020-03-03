@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface GenericDAO<T> {
 	
-	void apply(TransactionManager tManager);
-
 	public void add(T t);
 
 	public void update(int index, T t);

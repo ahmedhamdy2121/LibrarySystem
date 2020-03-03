@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class GenericDAOImpl<T> implements GenericDAO<T> {
-	
+
 	private T t;
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("ls");
@@ -31,18 +31,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	public List<T> getAll() {
-		Query query = em.createQuery("SELECT e FROM "
-				+ t.getClass()
-				+ " e");
-	    return query.getResultList();
+		Query query = em.createQuery("SELECT t FROM " + t.getClass() + " t");
+		return query.getResultList();
 	}
-
-	public void apply(TransactionManager tManager) {
-		em.getTransaction().begin();
-		
-		tManager.apply();
-		
-		em.getTransaction().commit();
-	}
-
 }
