@@ -11,10 +11,10 @@ public interface MemberController extends System {
     /**
      * 
      * @param member
-     * @return false if operation not succeeded
+     * @return -1 if member is not added
      * @throws LibrarySystemException
      */
-    public boolean createMember(Member member) throws LibrarySystemException;
+    public int createMember(Member member) throws LibrarySystemException;
     
     /**
      * 

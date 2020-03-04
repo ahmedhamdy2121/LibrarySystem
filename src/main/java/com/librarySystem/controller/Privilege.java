@@ -3,8 +3,22 @@ package com.librarySystem.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Getting Enum from Integer:
+ * 
+ * PageType pageType = PageType.valueOf(2); // pageType = PageType.CODING
+ * 
+ * Getting Integer from Enum:
+ * 
+ * ProductType productType = ProductType.DATABASES;
+ * int productTypeId = productType.getValue(); // productTypeId = 3
+ * 
+ * @author ahmed hamdy
+ *
+ */
 public enum Privilege {
-	ADMIN(1),
+	NONE(0),
+    ADMIN(1),
 	LIBRARIAN(2), 
 	BOTH(3);
 	
@@ -21,10 +35,21 @@ public enum Privilege {
         }
     }
 
+    /**
+     * Getting Enum from Integer
+     * 
+     * @param privilege
+     * @return
+     */
     public static Privilege valueOf(int privilege) {
         return (Privilege) map.get(privilege);
     }
 
+    /**
+     * Getting Integer from Enum
+     * 
+     * @return
+     */
     public int getValue() {
         return value;
     }

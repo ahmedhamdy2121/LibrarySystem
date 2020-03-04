@@ -11,6 +11,8 @@ public abstract class SystemImpl {
 	protected Person currentLoggedUser;
 	
     public Privilege getPermission() {
+        if (currentLoggedUser == null)
+            return Privilege.NONE;
     	return Privilege.valueOf(currentLoggedUser.getPermissions());
     }
 }

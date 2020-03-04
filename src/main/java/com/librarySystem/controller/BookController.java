@@ -19,7 +19,7 @@ public interface BookController extends System {
      * @return null if the book is not found or user not found
      * @throws LibrarySystemException
      */
-    public Member checkoutBook(String memberID, String bookISBN) 
+    public Member checkoutBook(long memberID, String bookISBN) 
             throws LibrarySystemException;
     
     /**
@@ -28,7 +28,7 @@ public interface BookController extends System {
      * @return null if member not found
      * @throws LibrarySystemException
      */
-    public Member viewCheckoutRecord(String memberID)
+    public Member viewCheckoutRecord(long memberID)
             throws LibrarySystemException;
     
     /**

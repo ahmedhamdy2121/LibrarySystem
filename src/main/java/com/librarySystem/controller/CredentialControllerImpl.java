@@ -12,7 +12,9 @@ public class CredentialControllerImpl extends SystemImpl
     @Override
     public Person login(String username, String password)
             throws LibrarySystemException {
-        // TODO Auto-generated method stub
+        if (currentLoggedUser == null)
+            throw new LibrarySystemException("A user is already logged in");
+        
         return null;
     }
 

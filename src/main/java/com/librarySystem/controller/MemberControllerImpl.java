@@ -10,9 +10,9 @@ public class MemberControllerImpl extends SystemImpl
         implements MemberController {
 
     @Override
-    public boolean createMember(Member member) throws LibrarySystemException {
+    public int createMember(Member member) throws LibrarySystemException {
         // TODO Auto-generated method stub
-        return false;
+        return -1;
     }
 
     @Override

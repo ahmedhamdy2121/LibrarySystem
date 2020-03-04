@@ -2,6 +2,10 @@ package com.librarySystem.test;
 
 import javax.persistence.EntityTransaction;
 
+import com.librarySystem.controller.BookController;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.controller.CredentialController;
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
 import com.librarySystem.dao.GenericDAOImpl;
@@ -13,6 +17,14 @@ import com.librarySystem.entity.Person;
 public class Test {
 
 	public static void main(String[] args) {
+	    
+	    BookController b = ControllerFactory.getController(Controller.Book);
+        CredentialController c = ControllerFactory.getController(Controller.Credential);
+        
+//        System.out.println(b.addNewBook(null));
+        System.out.println(c.getPermission());
+        System.out.println(c.getPermission().getValue());
+	    
 		Test t = new Test();
 		t.test();
 	}
