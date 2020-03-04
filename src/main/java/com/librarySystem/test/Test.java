@@ -1,7 +1,10 @@
 package com.librarySystem.test;
 
+import javax.persistence.EntityTransaction;
+
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
+import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.PersonDao;
 import com.librarySystem.dao.PersonDaoImpl;
 import com.librarySystem.entity.Book;
@@ -10,32 +13,46 @@ import com.librarySystem.entity.Person;
 public class Test {
 
 	public static void main(String[] args) {
+		Test t = new Test();
+		t.test();
+	}
 
-		Book book = new Book();
+	public void test() {
+		EntityTransaction et = GenericDAOImpl.getTransaction();
+		try {
+			et.begin();
 
-		String bookTitle = "bla bla bla";
-		int isbn = 1235;
-		book.setTitle(bookTitle);
-		book.setIsbn(isbn);
+			Book book = new Book();
 
-		BookDao bookDao = new BookDaoImpl();
+			String bookTitle = "bla bla bla bla";
+			int isbn = 12356;
+			book.setTitle(bookTitle);
+			book.setIsbn(isbn);
 
-		bookDao.add(book);
+			BookDao bookDao = new BookDaoImpl();
 
-		bookDao.getAll(Book.class).forEach((b) -> System.out.println(b.getId() + ": " + b.getTitle()));
+			bookDao.add(book);
 
-		System.out.println("=========================> " + bookDao.findByISBN(isbn).getTitle());
-		
-		PersonDao personDao = new PersonDaoImpl();
-		
-		String userName = "mohamed keilany";
-		String password = "password_1";
-		Person p = new Person(userName, password, 1234);
-		
-		personDao.add(p);
-		
-		System.out.println("=========================> " + personDao.login(userName, password).getUserName());
-		
+			bookDao.getAll(Book.class).forEach((b) -> System.out.println(b.getId() + ": " + b.getTitle()));
+
+			System.out.println("=========================> " + bookDao.findByISBN(isbn).getTitle());
+
+			PersonDao personDao = new PersonDaoImpl();
+
+			String userName = "mohamed alaaeldin";
+			String password = "password_1";
+			Person p = new Person(userName, password, 1234);
+
+			personDao.add(p);
+
+			System.out.println("=========================> " + personDao.login(userName, password).getUserName());
+
+			et.commit();
+		} catch (Exception e) {
+			if (et != null)
+				et.rollback();
+			e.printStackTrace();
+		}
 	}
 
 }

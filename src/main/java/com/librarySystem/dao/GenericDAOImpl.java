@@ -12,86 +12,40 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("ls");
 	protected static EntityManager em = factory.createEntityManager();
+	private static EntityTransaction et = em.getTransaction();
 
-	@Override
-	public void add(T t) {
-		EntityTransaction et = null;
-		try {
-			et = em.getTransaction();
-			et.begin();
-			em.persist(t);
-			et.commit();
-		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
-			e.printStackTrace();
-		}
+	public static EntityTransaction getTransaction() {
+		return GenericDAOImpl.et;
 	}
 
 	@Override
-	public void update(int index, T t) {
-		EntityTransaction et = null;
-		try {
-			et = em.getTransaction();
-			et.begin();
-			em.merge(t);
-			et.commit();
-		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
-			e.printStackTrace();
-		}
+	public void add(T t) {
+		em.persist(t);
+	}
+
+	@Override
+	public void update(T t) {
+		em.merge(t);
 	}
 
 	@Override
 	public void remove(long index) {
-		EntityTransaction et = null;
-		try {
-			et = em.getTransaction();
-			et.begin();
-			em.remove(getByIndex(index));
-			et.commit();
-		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
-			e.printStackTrace();
-		}
+		em.remove(getByIndex(index));
 	}
 
 	@SuppressWarnings({ "unchecked", "null" })
-    @Override
+	@Override
 	public T getByIndex(long index) {
 		T t = null;
-		EntityTransaction et = null;
-		try {
-			et = em.getTransaction();
-			et.begin();
-			t = (T) em.find(t.getClass(), index);
-			et.commit();
-		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
-			e.printStackTrace();
-		}
-		return t;
+		return (T) em.find(t.getClass(), index);
 	}
 
 	@SuppressWarnings("unchecked")
-    @Override
+	@Override
 	public List<T> getAll(Class<T> t) {
 		List<T> list = null;
-		EntityTransaction et = null;
-		try {
-			et = em.getTransaction();
-			et.begin();
-			Query query = em.createQuery("SELECT t FROM " + t.getName() + " t");
-			list = query.getResultList();
-			et.commit();
-		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
-			e.printStackTrace();
-		}
-		return list;		
+		Query query = em.createQuery("SELECT t FROM " + t.getName() + " t");
+		list = query.getResultList();
+		return list;
 	}
 }

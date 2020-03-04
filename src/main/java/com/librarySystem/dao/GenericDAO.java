@@ -6,7 +6,7 @@ public interface GenericDAO<T> {
 	
 	public void add(T t);
 
-	public void update(int index, T t);
+	public void update(T t);
 
 	public void remove(long index);
 
