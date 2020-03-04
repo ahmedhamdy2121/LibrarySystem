@@ -11,8 +11,9 @@ import javax.persistence.Query;
 public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("ls");
-	private static EntityManager em = factory.createEntityManager();
+	protected static EntityManager em = factory.createEntityManager();
 
+	@Override
 	public void add(T t) {
 		EntityTransaction et = null;
 		try {
@@ -27,6 +28,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 	}
 
+	@Override
 	public void update(int index, T t) {
 		EntityTransaction et = null;
 		try {
@@ -41,7 +43,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 	}
 
-	public void remove(int index) {
+	@Override
+	public void remove(long index) {
 		EntityTransaction et = null;
 		try {
 			et = em.getTransaction();
@@ -55,7 +58,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 	}
 
-	public T getByIndex(int index) {
+	@Override
+	public T getByIndex(long index) {
 		T t = null;
 		EntityTransaction et = null;
 		try {
@@ -71,6 +75,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		return t;
 	}
 
+	@Override
 	public List<T> getAll(Class<T> t) {
 		List<T> list = null;
 		EntityTransaction et = null;
