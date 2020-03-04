@@ -40,7 +40,6 @@ public class Member implements Serializable {
 	CheckoutRecord checkoutRecord;
 
 	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
-//	@JoinColumn(name = "copy_id")
 	BookCopy bookCopy;
 
 	public Member() {
