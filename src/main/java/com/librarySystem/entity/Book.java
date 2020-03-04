@@ -1,21 +1,25 @@
 package com.librarySystem.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
 public class Book implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,17 +27,30 @@ public class Book implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "book_name")
-	private String bookName;
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "isbn")
+	int isbn;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "book_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "author_id") })
+	List<Author> authors;
+
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<BookCopy> bookCopyList;
 
 	public Book() {
-
 	}
 
-	public Book(long id, String bookName) {
+	public Book(long id, String title, int isbn, List<Author> authors, List<BookCopy> bookCopyList) {
 		super();
 		this.id = id;
-		this.bookName = bookName;
+		this.title = title;
+		this.isbn = isbn;
+		this.authors = authors;
+		this.bookCopyList = bookCopyList;
 	}
 
 	public long getId() {
@@ -44,12 +61,40 @@ public class Book implements Serializable {
 		this.id = id;
 	}
 
-	public String getBookName() {
-		return bookName;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
+	}
+
+	public List<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
+	}
+
+	public List<BookCopy> getBookCopyList() {
+		return bookCopyList;
+	}
+
+	public void setBookCopyList(List<BookCopy> bookCopyList) {
+		this.bookCopyList = bookCopyList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

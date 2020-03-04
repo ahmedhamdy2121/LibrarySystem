@@ -12,6 +12,6 @@ public interface GenericDAO<T> {
 
 	public T getByIndex(int index);
 
-	public List<T> getAll();
+	public List<T> getAll(Class<T> t);
 
 }
