@@ -1,5 +1,7 @@
 package com.librarySystem.dao;
 
-public interface MemberDao {
+import com.librarySystem.entity.Member;
+
+public interface MemberDao extends GenericDAO<Member>{
 
 }

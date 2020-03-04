@@ -45,10 +45,8 @@ public class Member implements Serializable {
 	public Member() {
 	}
 
-	public Member(long id, String firstName, String lastName, String phoneNumber, Address address,
+	public Member(String firstName, String lastName, String phoneNumber, Address address,
 			CheckoutRecord checkoutRecord, BookCopy bookCopy) {
-		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;

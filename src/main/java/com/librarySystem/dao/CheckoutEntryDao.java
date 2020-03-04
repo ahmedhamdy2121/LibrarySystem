@@ -1,5 +1,7 @@
 package com.librarySystem.dao;
 
-public interface CheckoutEntryDao {
+import com.librarySystem.entity.CheckoutEntry;
+
+public interface CheckoutEntryDao extends GenericDAO<CheckoutEntry>{
 
 }

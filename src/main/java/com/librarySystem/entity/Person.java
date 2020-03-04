@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
@@ -20,7 +22,8 @@ public class Person implements Serializable {
 	@Column(name = "id")
 	long id;
 
-	@Column(name = "user_name")
+	@NotNull
+	@Column(name = "user_name", unique = true)
 	String userName;
 
 	@Column(name = "password")
@@ -32,9 +35,7 @@ public class Person implements Serializable {
 	public Person() {
 	}
 
-	public Person(long id, String userName, String password, int permissions) {
-		super();
-		this.id = id;
+	public Person(String userName, String password, int permissions) {
 		this.userName = userName;
 		this.password = password;
 		this.permissions = permissions;

@@ -1,5 +1,7 @@
 package com.librarySystem.dao;
 
-public interface BookCopyDao {
+import com.librarySystem.entity.BookCopy;
+
+public interface BookCopyDao extends GenericDAO<BookCopy>{
 
 }

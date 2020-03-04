@@ -30,8 +30,11 @@ public class Book implements Serializable {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "isbn")
+	@Column(name = "isbn", unique = true)
 	int isbn;
+	
+	@Column
+	int borrowDuration;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "book_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
@@ -44,9 +47,7 @@ public class Book implements Serializable {
 	public Book() {
 	}
 
-	public Book(long id, String title, int isbn, List<Author> authors, List<BookCopy> bookCopyList) {
-		super();
-		this.id = id;
+	public Book(String title, int isbn, List<Author> authors, List<BookCopy> bookCopyList) {
 		this.title = title;
 		this.isbn = isbn;
 		this.authors = authors;
@@ -96,5 +97,15 @@ public class Book implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public int getBorrowDuration() {
+		return borrowDuration;
+	}
+
+	public void setBorrowDuration(int borrowDuration) {
+		this.borrowDuration = borrowDuration;
+	}
+	
+	
 
 }

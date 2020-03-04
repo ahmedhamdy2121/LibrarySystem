@@ -1,5 +1,7 @@
 package com.librarySystem.dao;
 
-public interface AuthorDao {
+import com.librarySystem.entity.Author;
+
+public interface AuthorDao extends GenericDAO<Author>{
 
 }

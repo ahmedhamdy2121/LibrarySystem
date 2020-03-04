@@ -1,5 +1,7 @@
 package com.librarySystem.dao;
 
-public interface AddressDao {
+import com.librarySystem.entity.Address;
+
+public interface AddressDao extends GenericDAO<Address>{
 
 }

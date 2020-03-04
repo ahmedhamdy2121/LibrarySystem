@@ -48,10 +48,8 @@ public class Author implements Serializable {
 	public Author() {
 	}
 
-	public Author(long id, String firstName, String lastName, String phoneNumber, String bio, Address address,
+	public Author(String firstName, String lastName, String phoneNumber, String bio, Address address,
 			List<Book> books) {
-		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;

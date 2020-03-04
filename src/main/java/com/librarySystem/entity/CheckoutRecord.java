@@ -40,9 +40,7 @@ public class CheckoutRecord implements Serializable {
 	public CheckoutRecord() {
 	}
 
-	public CheckoutRecord(long id, int totalFine, Member member, List<CheckoutEntry> checkoutEntryList) {
-		super();
-		this.id = id;
+	public CheckoutRecord(int totalFine, Member member, List<CheckoutEntry> checkoutEntryList) {
 		this.totalFine = totalFine;
 		this.member = member;
 		this.checkoutEntryList = checkoutEntryList;

@@ -25,7 +25,7 @@ public class CheckoutEntry implements Serializable {
 	long id;
 
 	@Column(name = "fine")
-	int fine;
+	double fine;
 
 	@Column(name = "due_date")
 	Date dueDate;
@@ -46,16 +46,12 @@ public class CheckoutEntry implements Serializable {
 	public CheckoutEntry() {
 	}
 
-	public CheckoutEntry(long id, int fine, Date dueDate, Date checkoutDate, Date returnDate, BookCopy bookCopy,
-			CheckoutRecord checkoutRecord) {
-		super();
-		this.id = id;
+	public CheckoutEntry(double fine, Date dueDate, Date checkoutDate, Date returnDate, BookCopy bookCopy) {
 		this.fine = fine;
 		this.dueDate = dueDate;
 		this.checkoutDate = checkoutDate;
 		this.returnDate = returnDate;
 		this.bookCopy = bookCopy;
-		this.checkoutRecord = checkoutRecord;
 	}
 
 	public long getId() {
@@ -66,11 +62,11 @@ public class CheckoutEntry implements Serializable {
 		this.id = id;
 	}
 
-	public int getFine() {
+	public double getFine() {
 		return fine;
 	}
 
-	public void setFine(int fine) {
+	public void setFine(double fine) {
 		this.fine = fine;
 	}
 

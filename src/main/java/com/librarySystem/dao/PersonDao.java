@@ -1,5 +1,9 @@
 package com.librarySystem.dao;
 
-public interface PersonDao {
+import com.librarySystem.entity.Person;
+
+public interface PersonDao extends GenericDAO<Person>{
+	
+	Person login(String userName, String password);
 
 }

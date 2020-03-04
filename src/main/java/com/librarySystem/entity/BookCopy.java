@@ -23,9 +23,6 @@ public class BookCopy implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	long id;
-	
-	@Column(name = "unique_copy_number")
-	String uniqueCopyNumber;
 
 	@Column(name = "due_date")
 	Date dueDate;
@@ -43,14 +40,11 @@ public class BookCopy implements Serializable {
 	public BookCopy() {
 	}
 
-	public BookCopy(long id, Date dueDate, boolean isAvailable, Member member, Book book, String uniqueCopyNumber) {
-		super();
-		this.id = id;
+	public BookCopy(Date dueDate, boolean isAvailable, Member member, Book book) {
 		this.dueDate = dueDate;
 		this.isAvailable = isAvailable;
 		this.member = member;
 		this.book = book;
-		this.uniqueCopyNumber = uniqueCopyNumber;
 	}
 
 	public long getId() {
@@ -96,15 +90,5 @@ public class BookCopy implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public String getUniqueCopyNumber() {
-		return uniqueCopyNumber;
-	}
-
-	public void setUniqueCopyNumber(String uniqueCopyNumber) {
-		this.uniqueCopyNumber = uniqueCopyNumber;
-	}
-	
-	
 
 }
