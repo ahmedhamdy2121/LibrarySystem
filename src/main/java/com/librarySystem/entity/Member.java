@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Member implements Serializable {
 	@JoinColumn(name = "address_id")
 	Address address;
 
-	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	CheckoutRecord checkoutRecord;
 
 	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL)

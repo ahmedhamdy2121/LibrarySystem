@@ -33,7 +33,7 @@ public class Book implements Serializable {
 	@Column(name = "isbn", unique = true)
 	String isbn;
 	
-	@Column
+	@Column(name = "borrow_duration")
 	int borrowDuration;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -41,7 +41,7 @@ public class Book implements Serializable {
 			@JoinColumn(name = "author_id") })
 	List<Author> authors;
 
-	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	List<BookCopy> bookCopyList;
 
 	public Book() {

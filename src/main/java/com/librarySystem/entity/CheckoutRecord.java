@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,13 +29,13 @@ public class CheckoutRecord implements Serializable {
 	long id;
 
 	@Column(name = "total_fine")
-	int totalFine;
+	double totalFine;
 
 	@OneToOne
 	@JoinColumn(name = "member_id")
 	Member member;
 
-	@OneToMany(mappedBy = "checkoutRecord", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "checkoutRecord", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	List<CheckoutEntry> checkoutEntryList;
 
 	public CheckoutRecord() {
@@ -68,11 +69,11 @@ public class CheckoutRecord implements Serializable {
 		this.id = id;
 	}
 
-	public int getTotalFine() {
+	public double getTotalFine() {
 		return totalFine;
 	}
 
-	public void setTotalFine(int totalFine) {
+	public void setTotalFine(double totalFine) {
 		this.totalFine = totalFine;
 	}
 
