@@ -58,7 +58,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 	}
 
-	@Override
+	@SuppressWarnings({ "unchecked", "null" })
+    @Override
 	public T getByIndex(long index) {
 		T t = null;
 		EntityTransaction et = null;
@@ -75,7 +76,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		return t;
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public List<T> getAll(Class<T> t) {
 		List<T> list = null;
 		EntityTransaction et = null;

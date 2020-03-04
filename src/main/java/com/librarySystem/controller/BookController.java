@@ -10,7 +10,7 @@ import com.librarySystem.entity.Member;
  * @author ahmed hamdy
  *
  */
-public interface BookController {
+public interface BookController extends System {
     
     /**
      * 

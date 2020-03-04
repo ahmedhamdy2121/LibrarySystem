@@ -1,8 +1,6 @@
 package com.librarySystem.test;
 
-import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
-import com.librarySystem.dao.GenericDAO;
 import com.librarySystem.entity.Book;
 
 public class Test {

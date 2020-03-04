@@ -6,7 +6,7 @@ import com.librarySystem.entity.Member;
  * @author ahmed hamdy
  *
  */
-public interface MemberController {
+public interface MemberController extends System {
     
     /**
      * 
