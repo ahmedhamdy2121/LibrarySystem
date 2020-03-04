@@ -6,6 +6,7 @@ import com.librarySystem.controller.BookController;
 import com.librarySystem.controller.Controller;
 import com.librarySystem.controller.ControllerFactory;
 import com.librarySystem.controller.CredentialController;
+import com.librarySystem.controller.LibrarySystemException;
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
 import com.librarySystem.dao.GenericDAOImpl;
@@ -16,12 +17,12 @@ import com.librarySystem.entity.Person;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws LibrarySystemException {
 	    
 	    BookController b = ControllerFactory.getController(Controller.Book);
         CredentialController c = ControllerFactory.getController(Controller.Credential);
         
-//        System.out.println(b.addNewBook(null));
+        System.out.println(b.addNewBook(null));
         System.out.println(c.getPermission());
         System.out.println(c.getPermission().getValue());
 	    

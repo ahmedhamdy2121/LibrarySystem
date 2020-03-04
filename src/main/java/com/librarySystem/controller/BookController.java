@@ -43,18 +43,18 @@ public interface BookController extends System {
     /**
      * 
      * @param book
-     * @return false if operation not succeeded
+     * @return null if operation not succeeded
      * @throws LibrarySystemException
      */
-    public boolean addNewBook(Book book) throws LibrarySystemException;
+    public Book addNewBook(Book book) throws LibrarySystemException;
     
     /**
      * 
      * @param ISBN
-     * @return false if book not found
+     * @return null if book not found
      * @throws LibrarySystemException
      */
-    public boolean addNewCopy(String ISBN, int additionalCopies) 
+    public Book addNewCopy(String bookISBN, int additionalCopies) 
             throws LibrarySystemException;
     
     /**
@@ -63,5 +63,5 @@ public interface BookController extends System {
      * @return null if book not found
      * @throws LibrarySystemException
      */
-    public Book getBookByISBN(String ISBN) throws LibrarySystemException;
+    public Book getBookByISBN(String bookISBN) throws LibrarySystemException;
 }

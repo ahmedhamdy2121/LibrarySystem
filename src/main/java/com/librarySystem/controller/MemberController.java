@@ -11,10 +11,10 @@ public interface MemberController extends System {
     /**
      * 
      * @param member
-     * @return -1 if member is not added
+     * @return null if member is not added
      * @throws LibrarySystemException
      */
-    public int createMember(Member member) throws LibrarySystemException;
+    public Member createMember(Member member) throws LibrarySystemException;
     
     /**
      * 
@@ -22,14 +22,14 @@ public interface MemberController extends System {
      * @return null if member not found
      * @throws LibrarySystemException
      */
-    public Member getMemberByID(String memberID) 
+    public Member getMemberByID(long memberID) 
             throws LibrarySystemException;
     
     /**
      * 
      * @param member
-     * @return false if operation not succeeded
+     * @return null if operation not succeeded
      * @throws LibrarySystemException
      */
-    public boolean editMember(Member member) throws LibrarySystemException;
+    public Member editMember(Member member) throws LibrarySystemException;
 }
