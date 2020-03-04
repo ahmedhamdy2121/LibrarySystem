@@ -31,7 +31,7 @@ public class Book implements Serializable {
 	private String title;
 
 	@Column(name = "isbn", unique = true)
-	int isbn;
+	String isbn;
 	
 	@Column
 	int borrowDuration;
@@ -47,7 +47,7 @@ public class Book implements Serializable {
 	public Book() {
 	}
 
-	public Book(String title, int isbn, List<Author> authors, List<BookCopy> bookCopyList) {
+	public Book(String title, String isbn, List<Author> authors, List<BookCopy> bookCopyList) {
 		this.title = title;
 		this.isbn = isbn;
 		this.authors = authors;
@@ -70,11 +70,11 @@ public class Book implements Serializable {
 		this.title = title;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 

@@ -4,6 +4,6 @@ import com.librarySystem.entity.Book;
 
 public interface BookDao extends GenericDAO<Book>{
 	
-	Book findByISBN(int isbn);
+	Book findByISBN(String isbn);
 
 }

@@ -37,7 +37,7 @@ public class Test {
 			Book book = new Book();
 
 			String bookTitle = "bla bla bla bla";
-			int isbn = 12356;
+			String isbn = "1234";
 			book.setTitle(bookTitle);
 			book.setIsbn(isbn);
 
