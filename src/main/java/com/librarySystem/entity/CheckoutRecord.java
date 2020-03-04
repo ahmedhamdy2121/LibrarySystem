@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -45,6 +47,20 @@ public class CheckoutRecord implements Serializable {
 		this.member = member;
 		this.checkoutEntryList = checkoutEntryList;
 	}
+	
+	@PrePersist
+    public void prePersist() {
+		if(checkoutEntryList != null && !checkoutEntryList.isEmpty()) {
+			checkoutEntryList.forEach((entry) -> totalFine += entry.getFine());
+		}
+    }
+ 
+    @PreUpdate
+    public void preUpdate() {
+    	if(checkoutEntryList != null && !checkoutEntryList.isEmpty()) {
+			checkoutEntryList.forEach((entry) -> totalFine += entry.getFine());
+		}
+    }
 
 	public long getId() {
 		return id;
