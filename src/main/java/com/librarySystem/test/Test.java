@@ -19,12 +19,12 @@ public class Test {
 
 	public static void main(String[] args) throws LibrarySystemException {
 	    
-	    BookController b = ControllerFactory.getController(Controller.Book);
-        CredentialController c = ControllerFactory.getController(Controller.Credential);
-        
-        System.out.println(b.addNewBook(null));
-        System.out.println(c.getPermission());
-        System.out.println(c.getPermission().getValue());
+//	    BookController b = ControllerFactory.getController(Controller.Book);
+//        CredentialController c = ControllerFactory.getController(Controller.Credential);
+//        
+//        System.out.println(b.addNewBook(null));
+//        System.out.println(c.getPermission());
+//        System.out.println(c.getPermission().getValue());
 	    
 		Test t = new Test();
 		t.test();
@@ -65,6 +65,8 @@ public class Test {
 			if (et != null)
 				et.rollback();
 			e.printStackTrace();
+		}finally {
+			GenericDAOImpl.close();
 		}
 	}
 

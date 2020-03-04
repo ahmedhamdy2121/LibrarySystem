@@ -17,6 +17,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	public static EntityTransaction getTransaction() {
 		return GenericDAOImpl.et;
 	}
+	
+	public static void close() {
+		em.close();
+	}
 
 	@Override
 	public T add(T t) {

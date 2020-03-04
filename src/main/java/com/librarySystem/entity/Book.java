@@ -36,7 +36,7 @@ public class Book implements Serializable {
 	@Column(name = "borrow_duration")
 	int borrowDuration;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "book_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "author_id") })
 	List<Author> authors;
@@ -47,11 +47,12 @@ public class Book implements Serializable {
 	public Book() {
 	}
 
-	public Book(String title, String isbn, List<Author> authors, List<BookCopy> bookCopyList) {
+	public Book(String title, String isbn, List<Author> authors, List<BookCopy> bookCopyList, int borrowDuration) {
 		this.title = title;
 		this.isbn = isbn;
 		this.authors = authors;
 		this.bookCopyList = bookCopyList;
+		this.borrowDuration = borrowDuration;
 	}
 
 	public long getId() {
