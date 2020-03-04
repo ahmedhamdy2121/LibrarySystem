@@ -19,13 +19,17 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public void add(T t) {
+	public T add(T t) {
 		em.persist(t);
+		em.flush();
+		return t;
 	}
 
 	@Override
-	public void update(T t) {
+	public T update(T t) {
 		em.merge(t);
+		em.flush();
+		return t;
 	}
 
 	@Override

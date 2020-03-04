@@ -31,7 +31,7 @@ public class Test {
 
 			BookDao bookDao = new BookDaoImpl();
 
-			bookDao.add(book);
+			System.out.println("=========================> " + bookDao.add(book).getId());
 
 			bookDao.getAll(Book.class).forEach((b) -> System.out.println(b.getId() + ": " + b.getTitle()));
 
@@ -43,7 +43,7 @@ public class Test {
 			String password = "password_1";
 			Person p = new Person(userName, password, 1234);
 
-			personDao.add(p);
+			System.out.println("=========================> " + personDao.add(p).getId());
 
 			System.out.println("=========================> " + personDao.login(userName, password).getUserName());
 
