@@ -134,30 +134,30 @@ public class Test {
 		try {
 			et.begin();
 
-			Book book = new Book();
-
-			String bookTitle = "bla bla bla bla";
-			String isbn = "1234";
-			book.setTitle(bookTitle);
-			book.setIsbn(isbn);
+//			Book book = new Book();
+//
+//			String bookTitle = "bla bla bla bla";
+//			String isbn = "1234";
+//			book.setTitle(bookTitle);
+//			book.setIsbn(isbn);
 
 			BookDao bookDao = new BookDaoImpl();
 
-			System.out.println("=========================> " + bookDao.add(book).getId());
+//			System.out.println("=========================> " + bookDao.add(book).getId());
+//
+//			bookDao.getAll(Book.class).forEach((b) -> System.out.println(b.getId() + ": " + b.getTitle()));
 
-			bookDao.getAll(Book.class).forEach((b) -> System.out.println(b.getId() + ": " + b.getTitle()));
+			System.out.println("=========================> " + bookDao.getByIndex(1).getTitle());
 
-			System.out.println("=========================> " + bookDao.findByISBN(isbn).getTitle());
-
-			PersonDao personDao = new PersonDaoImpl();
-
-			String userName = "mohamed alaaeldin";
-			String password = "password_1";
-			Person p = new Person(userName, password, 1234);
-
-			System.out.println("=========================> " + personDao.add(p).getId());
-
-			System.out.println("=========================> " + personDao.login(userName, password).getUserName());
+//			PersonDao personDao = new PersonDaoImpl();
+//
+//			String userName = "mohamed alaaeldin";
+//			String password = "password_1";
+//			Person p = new Person(userName, password, 1234);
+//
+//			System.out.println("=========================> " + personDao.add(p).getId());
+//
+//			System.out.println("=========================> " + personDao.login(userName, password).getUserName());
 
 			et.commit();
 		} catch (Exception e) {

@@ -13,4 +13,14 @@ public class BookDaoImpl extends GenericDAOImpl<Book> implements BookDao {
 		return (Book) query.getSingleResult();
 	}
 
+	@Override
+	public void remove(long index) {
+		em.remove(getByIndex(index));
+	}
+
+	@Override
+	public Book getByIndex(long index) {
+		return (Book) em.find(Book.class, index);
+	}
+
 }

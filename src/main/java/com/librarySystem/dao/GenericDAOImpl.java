@@ -32,17 +32,16 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		return t;
 	}
 
-	@Override
-	public void remove(long index) {
-		em.remove(getByIndex(index));
-	}
-
-	@SuppressWarnings({ "unchecked", "null" })
-	@Override
-	public T getByIndex(long index) {
-		T t = null;
-		return (T) em.find(t.getClass(), index);
-	}
+//	@Override
+//	public void remove(long index) {
+//		em.remove(getByIndex(index));
+//	}
+//
+//	@SuppressWarnings({ "unchecked", "null" })
+//	@Override
+//	public T getByIndex(long index) {
+//		return (T) em.find(T, index);
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override
