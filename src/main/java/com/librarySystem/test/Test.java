@@ -127,7 +127,7 @@ public class Test {
 	
 	public void testCheckoutBook() throws LibrarySystemException {
 	    BookController b = ControllerFactory.getController(Controller.Book);
-	    System.out.println(b.checkoutBook(29, "123-456"));
+	    System.out.println(b.checkoutBook(34, "123-456"));
 	}
 	
 	public void testHibernate() {

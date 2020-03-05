@@ -1,5 +1,7 @@
 package com.librarySystem.controller;
 
+import javax.persistence.RollbackException;
+
 import com.librarySystem.dao.PersonDao;
 import com.librarySystem.dao.PersonDaoImpl;
 import com.librarySystem.entity.Person;
@@ -33,7 +35,7 @@ public class CredentialControllerImpl extends LibrarySystemImpl
             
             return person;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "

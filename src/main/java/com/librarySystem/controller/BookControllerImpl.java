@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.RollbackException;
+
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
 import com.librarySystem.dao.MemberDao;
@@ -63,6 +65,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             BookCopy bookCopy = null;
             for (BookCopy copy: bookCopies) {
                 if (copy.isAvailable()) {
+                    copy.setMember(member);
                     copy.setAvailable(false);
                     bookCopy = copy;
                     break;
@@ -75,9 +78,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             entries.add(new CheckoutEntry
                     (0, java.sql.Date.valueOf(LocalDate.now()
                             .plusDays(book.getBorrowDuration())), 
-                     new Date(), null, bookCopy));
-            
-            member.setBookCopy(bookCopy);
+                     new Date(), null, bookCopy, record));
             
             // Persistence
             mDao.update(member);
@@ -87,7 +88,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return member;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -124,7 +125,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return member;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -171,7 +172,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return overDueBookCopies;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -204,7 +205,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return updatedBook;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -248,7 +249,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return book;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -281,7 +282,7 @@ public class BookControllerImpl extends LibrarySystemImpl
             
             return book;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "

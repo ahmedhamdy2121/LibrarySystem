@@ -46,12 +46,16 @@ public class CheckoutEntry implements Serializable {
 	public CheckoutEntry() {
 	}
 
-	public CheckoutEntry(double fine, Date dueDate, Date checkoutDate, Date returnDate, BookCopy bookCopy) {
+	public CheckoutEntry(double fine, Date dueDate, Date checkoutDate, 
+	                     Date returnDate, BookCopy bookCopy,
+	                     CheckoutRecord checkoutRecord) {
+	    
 		this.fine = fine;
 		this.dueDate = dueDate;
 		this.checkoutDate = checkoutDate;
 		this.returnDate = returnDate;
 		this.bookCopy = bookCopy;
+		this.checkoutRecord = checkoutRecord;
 	}
 
 	public long getId() {

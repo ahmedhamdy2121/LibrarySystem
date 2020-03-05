@@ -1,5 +1,7 @@
 package com.librarySystem.controller;
 
+import javax.persistence.RollbackException;
+
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.entity.Member;
@@ -35,7 +37,7 @@ public class MemberControllerImpl extends LibrarySystemImpl
             
             return updatedMember;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -69,7 +71,7 @@ public class MemberControllerImpl extends LibrarySystemImpl
             
             return member;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
@@ -102,7 +104,7 @@ public class MemberControllerImpl extends LibrarySystemImpl
             
             return updatedMember;
             
-        } catch (Exception e) {
+        } catch (IllegalStateException | RollbackException e) {
             if (et != null)
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
