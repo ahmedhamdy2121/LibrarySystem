@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 
+import com.librarySystem.controller.BookController;
 import com.librarySystem.controller.Controller;
 import com.librarySystem.controller.ControllerFactory;
 import com.librarySystem.controller.CredentialController;
@@ -14,12 +15,17 @@ import com.librarySystem.controller.Privilege;
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
 import com.librarySystem.dao.GenericDAOImpl;
+import com.librarySystem.dao.MemberDao;
+import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.dao.PersonDao;
 import com.librarySystem.dao.PersonDaoImpl;
 import com.librarySystem.entity.Address;
 import com.librarySystem.entity.Author;
 import com.librarySystem.entity.Book;
 import com.librarySystem.entity.BookCopy;
+import com.librarySystem.entity.CheckoutEntry;
+import com.librarySystem.entity.CheckoutRecord;
+import com.librarySystem.entity.Member;
 import com.librarySystem.entity.Person;
 
 public class Test {
@@ -30,8 +36,11 @@ public class Test {
 		Test t = new Test();
 		
 //		t.createUsers();
+//		t.createBooks();
+//		t.createMembers();
+		
 		t.testLogin();
-		t.createBooks();
+		t.testCheckoutBook();
 		//t.testHibernate();
 	}
 	
@@ -92,16 +101,15 @@ public class Test {
 	    try {
             et.begin();
 
-            PersonDao pDao = new PersonDaoImpl();
+            MemberDao mDoa = new MemberDaoImpl();
             
-            // create librarian
-            pDao.add(new Person("ahmed", "123", Privilege.LIBRARIAN.getValue()));
-            
-            // create admin
-            pDao.add(new Person("mohamed", "456", Privilege.ADMIN.getValue()));
-            
-            // create both
-            pDao.add(new Person("abd el salam", "789", Privilege.BOTH.getValue()));
+            Member m1 = new Member("member 1", "L1", "2354", 
+                                  new Address("st1", "c1", "s1", "123"), 
+                                  null, null);
+            m1.setCheckoutRecord(new CheckoutRecord(0, m1, 
+                                 new ArrayList<CheckoutEntry>()));
+
+            mDoa.add(m1);
 
             et.commit();
         } catch (Exception e) {
@@ -117,8 +125,9 @@ public class Test {
         System.out.println(c.getPermission());
 	}
 	
-	public void testCheckoutBook() {
-	    
+	public void testCheckoutBook() throws LibrarySystemException {
+	    BookController b = ControllerFactory.getController(Controller.Book);
+	    System.out.println(b.checkoutBook(29, "123-456"));
 	}
 	
 	public void testHibernate() {

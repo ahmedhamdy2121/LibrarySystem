@@ -11,7 +11,7 @@ import com.librarySystem.entity.Person;
  */
 public abstract class SystemImpl {
     
-	protected Person currentLoggedUser;
+	protected static Person currentLoggedUser;
 	protected EntityTransaction et = GenericDAOImpl.getTransaction();
 	
     public Privilege getPermission() {

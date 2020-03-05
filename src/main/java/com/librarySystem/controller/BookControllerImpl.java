@@ -76,6 +76,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                             .plusDays(book.getBorrowDuration())), 
                      new Date(), null, bookCopy));
             
+            member.setBookCopy(bookCopy);
+            
             // Persistence
             mDao.update(member);
             bDao.update(book);
