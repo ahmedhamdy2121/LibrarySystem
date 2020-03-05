@@ -6,7 +6,7 @@ public final class ControllerFactory {
     
     private ControllerFactory() {}
     
-    private static HashMap<Controller, System> map = 
+    private static HashMap<Controller, LibrarySystem> map = 
             new HashMap<>();
     
     static {
@@ -16,7 +16,7 @@ public final class ControllerFactory {
     }
     
     @SuppressWarnings("unchecked")
-    public static<T extends System> T getController(Controller c) {
+    public static<T extends LibrarySystem> T getController(Controller c) {
         if (! map.containsKey(c))
             throw new IllegalArgumentException("No controller found!");
         return (T) map.get(c);

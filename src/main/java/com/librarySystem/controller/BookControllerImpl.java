@@ -19,7 +19,8 @@ import com.librarySystem.entity.Member;
  * @author ahmed hamdy
  *
  */
-public class BookControllerImpl extends SystemImpl implements BookController {
+public class BookControllerImpl extends LibrarySystemImpl 
+        implements BookController {
 
     @Override
     public Member checkoutBook(long memberID, String bookISBN)

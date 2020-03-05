@@ -8,7 +8,7 @@ import com.librarySystem.entity.Member;
  * @author ahmed hamdy
  *
  */
-public class MemberControllerImpl extends SystemImpl
+public class MemberControllerImpl extends LibrarySystemImpl
         implements MemberController {
 
     @Override

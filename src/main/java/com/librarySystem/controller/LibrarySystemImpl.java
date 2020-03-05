@@ -9,7 +9,7 @@ import com.librarySystem.entity.Person;
  * @author ahmed hamdy
  *
  */
-public abstract class SystemImpl {
+public abstract class LibrarySystemImpl implements LibrarySystem {
     
 	protected static Person currentLoggedUser;
 	protected EntityTransaction et = GenericDAOImpl.getTransaction();

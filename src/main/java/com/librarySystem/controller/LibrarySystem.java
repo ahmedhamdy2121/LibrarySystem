@@ -1,6 +1,6 @@
 package com.librarySystem.controller;
 
-public interface System {
+public interface LibrarySystem {
 	
 	public Privilege getPermission();
 }

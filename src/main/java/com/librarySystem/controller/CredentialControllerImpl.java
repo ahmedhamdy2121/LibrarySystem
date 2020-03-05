@@ -8,7 +8,7 @@ import com.librarySystem.entity.Person;
  * @author ahmed hamdy
  *
  */
-public class CredentialControllerImpl extends SystemImpl
+public class CredentialControllerImpl extends LibrarySystemImpl
         implements CredentialController {
 
     @Override
@@ -29,7 +29,7 @@ public class CredentialControllerImpl extends SystemImpl
 
             et.commit();
             
-            this.currentLoggedUser = person;
+            currentLoggedUser = person;
             
             return person;
             

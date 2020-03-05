@@ -6,7 +6,7 @@ import com.librarySystem.entity.Person;
  * @author ahmed hamdy
  *
  */
-public interface CredentialController extends System {
+public interface CredentialController extends LibrarySystem {
     
     /**
      * 
