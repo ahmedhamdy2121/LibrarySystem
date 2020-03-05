@@ -14,6 +14,6 @@ public interface CredentialController extends System {
      * @param password
      * @return null if user not found
      */
-    public Person login(String username, String password) 
+    public Person login(String userName, String password) 
             throws LibrarySystemException;
 }

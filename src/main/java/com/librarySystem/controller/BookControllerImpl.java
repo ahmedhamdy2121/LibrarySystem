@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
+import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.entity.Book;
@@ -26,6 +27,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
             throws LibrarySystemException {
         
         // validation
+        if (memberID < 0)
+            throw new LibrarySystemException("Member ID can't be negative");
         if (bookISBN == null || bookISBN.isEmpty())
             throw new LibrarySystemException("Book ISBN can't be empty");
         if (! (currentLoggedUser != null 
@@ -87,6 +90,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
         }
 
     }
@@ -96,6 +101,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
             throws LibrarySystemException {
         
         // validation
+        if (memberID < 0)
+            throw new LibrarySystemException("Member ID can't be negative");
         if (! (currentLoggedUser != null 
                 && (currentLoggedUser.getPermissions() 
                         == Privilege.LIBRARIAN.getValue() 
@@ -122,6 +129,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
         }
         
     }
@@ -169,6 +178,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
         }
     }
 
@@ -201,14 +212,54 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
         }
     }
 
     @Override
     public Book addNewCopy(String bookISBN, int additionalCopies)
             throws LibrarySystemException {
-        // TODO Auto-generated method stub
-        return null;
+        
+        // validation
+        if (additionalCopies <= 0)
+            throw new LibrarySystemException("Book copies can't be 0 or "
+                    + "or negative");
+        if (bookISBN == null || bookISBN.isEmpty())
+            throw new LibrarySystemException("Book is null");
+        if (! (currentLoggedUser != null 
+                && (currentLoggedUser.getPermissions() 
+                        == Privilege.ADMIN.getValue() 
+                || currentLoggedUser.getPermissions() 
+                        == Privilege.BOTH.getValue())))
+            throw new LibrarySystemException("Current logged user doen't have "
+                    + "the privilege to execute this function");
+        
+        try {
+            et.begin();
+
+            BookDao bDao = new BookDaoImpl();
+            Book book = bDao.findByISBN(bookISBN);
+
+            // logic
+            List<BookCopy> bookCopies = book.getBookCopyList();
+            
+            for (int i = 0; i < additionalCopies; i++) {
+                bookCopies.add(new BookCopy(null, true, null, book));
+            }
+            
+            et.commit();
+            
+            return book;
+            
+        } catch (Exception e) {
+            if (et != null)
+                et.rollback();
+            throw new LibrarySystemException("Error happened while dealing "
+                            + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
+        }
     }
 
     @Override
@@ -240,6 +291,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
+        } finally{
+            GenericDAOImpl.close();
         }
     }
 
