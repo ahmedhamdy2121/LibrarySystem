@@ -116,12 +116,12 @@ public class Member implements Serializable {
 		return serialVersionUID;
 	}
 
-    @Override
-    public String toString() {
-        return "Member [id=" + id + ", firstName=" + firstName + ", lastName="
-                + lastName + ", phoneNumber=" + phoneNumber + ", address="
-                + address + ", checkoutRecord=" + checkoutRecord
-                + ", bookCopy=" + bookCopy + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Member [id=" + id + ", firstName=" + firstName + ", lastName="
+//                + lastName + ", phoneNumber=" + phoneNumber + ", address="
+//                + address + ", checkoutRecord=" + checkoutRecord
+//                + ", bookCopy=" + bookCopy + "]";
+//    }
 
 }
