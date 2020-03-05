@@ -77,4 +77,10 @@ public class Person implements Serializable {
 		return serialVersionUID;
 	}
 
+    @Override
+    public String toString() {
+        return "Person [id=" + id + ", userName=" + userName + ", password="
+                + password + ", permissions=" + permissions + "]";
+    }
+
 }

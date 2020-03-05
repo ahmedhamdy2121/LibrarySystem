@@ -33,7 +33,7 @@ public class Member implements Serializable {
 	@Column(name = "phone_number")
 	String phoneNumber;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	Address address;
 
@@ -116,5 +116,12 @@ public class Member implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+    @Override
+    public String toString() {
+        return "Member [id=" + id + ", firstName=" + firstName + ", lastName="
+                + lastName + ", phoneNumber=" + phoneNumber + ", address="
+                + address + ", checkoutRecord=" + checkoutRecord
+                + ", bookCopy=" + bookCopy + "]";
+    }
+
 }

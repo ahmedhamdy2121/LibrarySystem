@@ -114,4 +114,12 @@ public class CheckoutEntry implements Serializable {
 		return serialVersionUID;
 	}
 
+    @Override
+    public String toString() {
+        return "CheckoutEntry [id=" + id + ", fine=" + fine + ", dueDate="
+                + dueDate + ", checkoutDate=" + checkoutDate + ", returnDate="
+                + returnDate + ", bookCopy=" + bookCopy + ", checkoutRecord="
+                + checkoutRecord + "]";
+    }
+
 }

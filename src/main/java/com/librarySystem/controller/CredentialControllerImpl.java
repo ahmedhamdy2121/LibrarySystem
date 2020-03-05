@@ -1,6 +1,5 @@
 package com.librarySystem.controller;
 
-import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.PersonDao;
 import com.librarySystem.dao.PersonDaoImpl;
 import com.librarySystem.entity.Person;
@@ -22,9 +21,6 @@ public class CredentialControllerImpl extends SystemImpl
         if (password == null || password.isEmpty())
             throw new LibrarySystemException("Password can't be empty");
         
-        if (currentLoggedUser == null)
-            throw new LibrarySystemException("A user is already logged in");
-        
         try {
             et.begin();
 
@@ -42,9 +38,8 @@ public class CredentialControllerImpl extends SystemImpl
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
 }

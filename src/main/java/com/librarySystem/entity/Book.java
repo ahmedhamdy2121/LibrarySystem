@@ -19,6 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "book")
 public class Book implements Serializable {
+    
+    public static final int BORROW_DURATION__7 = 7;
+    public static final int BORROW_DURATION__21 = 21;
 
 	private static final long serialVersionUID = 1L;
 
@@ -106,7 +109,12 @@ public class Book implements Serializable {
 	public void setBorrowDuration(int borrowDuration) {
 		this.borrowDuration = borrowDuration;
 	}
-	
-	
+
+    @Override
+    public String toString() {
+        return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn
+                + ", borrowDuration=" + borrowDuration + ", authors=" + authors
+                + ", bookCopyList=" + bookCopyList + "]";
+    }
 
 }

@@ -1,37 +1,127 @@
 package com.librarySystem.test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.EntityTransaction;
 
-import com.librarySystem.controller.BookController;
 import com.librarySystem.controller.Controller;
 import com.librarySystem.controller.ControllerFactory;
 import com.librarySystem.controller.CredentialController;
 import com.librarySystem.controller.LibrarySystemException;
+import com.librarySystem.controller.Privilege;
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
 import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.PersonDao;
 import com.librarySystem.dao.PersonDaoImpl;
+import com.librarySystem.entity.Address;
+import com.librarySystem.entity.Author;
 import com.librarySystem.entity.Book;
+import com.librarySystem.entity.BookCopy;
 import com.librarySystem.entity.Person;
 
 public class Test {
+    
+    private EntityTransaction et = GenericDAOImpl.getTransaction();
 
 	public static void main(String[] args) throws LibrarySystemException {
-	    
-//	    BookController b = ControllerFactory.getController(Controller.Book);
-//        CredentialController c = ControllerFactory.getController(Controller.Credential);
-//        
-//        System.out.println(b.addNewBook(null));
-//        System.out.println(c.getPermission());
-//        System.out.println(c.getPermission().getValue());
-	    
 		Test t = new Test();
-		t.test();
+		
+//		t.createUsers();
+		t.testLogin();
+		t.createBooks();
+		//t.testHibernate();
 	}
+	
+	public void createUsers() {
+	    try {
+	        et.begin();
 
-	public void test() {
-		EntityTransaction et = GenericDAOImpl.getTransaction();
+	        PersonDao pDao = new PersonDaoImpl();
+	        
+	        // create librarian
+	        pDao.add(new Person("ahmed", "123", Privilege.LIBRARIAN.getValue()));
+	        
+	        // create admin
+	        pDao.add(new Person("mohamed", "456", Privilege.ADMIN.getValue()));
+	        
+	        // create both
+	        pDao.add(new Person("abd el salam", "789", Privilege.BOTH.getValue()));
+
+	        et.commit();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        if (et != null)
+	            et.rollback();
+	    } 
+
+	}
+	
+	public void createBooks() {
+	    try {
+            et.begin();
+
+            BookDao bDoa = new BookDaoImpl();
+            
+            List<Author> authors = new ArrayList<>();
+            List<BookCopy> bookCopies = new ArrayList<>();
+            
+            Book b1 = new Book("book 1", "123-456", null, 
+                               null, Book.BORROW_DURATION__7);
+            
+            bookCopies.add(new BookCopy(null, true, null, b1));
+            authors.add(new Author("au 1", "au 11", "123", "fuck you", 
+                        new Address("st1", "c1", "s1", "123"), Arrays.asList(b1)));
+            
+            b1.setAuthors(authors);
+            b1.setBookCopyList(bookCopies);
+            
+            bDoa.add(b1);
+
+            et.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (et != null)
+                et.rollback();
+        } 
+	}
+	
+	public void createMembers() {
+	    try {
+            et.begin();
+
+            PersonDao pDao = new PersonDaoImpl();
+            
+            // create librarian
+            pDao.add(new Person("ahmed", "123", Privilege.LIBRARIAN.getValue()));
+            
+            // create admin
+            pDao.add(new Person("mohamed", "456", Privilege.ADMIN.getValue()));
+            
+            // create both
+            pDao.add(new Person("abd el salam", "789", Privilege.BOTH.getValue()));
+
+            et.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (et != null)
+                et.rollback();
+        } 
+	}
+	
+	public void testLogin() throws LibrarySystemException {
+        CredentialController c = ControllerFactory.getController(Controller.Credential);
+        System.out.println(c.login("ahmed", "123"));
+        System.out.println(c.getPermission());
+	}
+	
+	public void testCheckoutBook() {
+	    
+	}
+	
+	public void testHibernate() {
 		try {
 			et.begin();
 
@@ -65,8 +155,6 @@ public class Test {
 			if (et != null)
 				et.rollback();
 			e.printStackTrace();
-		}finally {
-			GenericDAOImpl.close();
 		}
 	}
 

@@ -1,6 +1,5 @@
 package com.librarySystem.controller;
 
-import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.entity.Member;
@@ -41,9 +40,8 @@ public class MemberControllerImpl extends SystemImpl
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
     @Override
@@ -76,9 +74,8 @@ public class MemberControllerImpl extends SystemImpl
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
     @Override
@@ -110,9 +107,8 @@ public class MemberControllerImpl extends SystemImpl
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
 }

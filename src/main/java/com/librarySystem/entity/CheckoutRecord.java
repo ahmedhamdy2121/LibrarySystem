@@ -97,4 +97,11 @@ public class CheckoutRecord implements Serializable {
 		return serialVersionUID;
 	}
 
+    @Override
+    public String toString() {
+        return "CheckoutRecord [id=" + id + ", totalFine=" + totalFine
+                + ", member=" + member + ", checkoutEntryList="
+                + checkoutEntryList + "]";
+    }
+
 }

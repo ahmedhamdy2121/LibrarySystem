@@ -38,7 +38,7 @@ public class Author implements Serializable {
 	@Column(name = "bio")
 	String bio;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	Address address;
 
@@ -117,7 +117,12 @@ public class Author implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
+    @Override
+    public String toString() {
+        return "Author [id=" + id + ", firstName=" + firstName + ", lastName="
+                + lastName + ", phoneNumber=" + phoneNumber + ", bio=" + bio
+                + ", address=" + address + ", books=" + books + "]";
+    }
 
 }

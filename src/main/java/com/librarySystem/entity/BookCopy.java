@@ -91,4 +91,10 @@ public class BookCopy implements Serializable {
 		return serialVersionUID;
 	}
 
+    @Override
+    public String toString() {
+        return "BookCopy [id=" + id + ", dueDate=" + dueDate + ", isAvailable="
+                + isAvailable + ", member=" + member + ", book=" + book + "]";
+    }
+
 }

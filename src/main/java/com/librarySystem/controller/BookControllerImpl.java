@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
-import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.entity.Book;
@@ -90,10 +89,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
-
+        
     }
     
     @Override
@@ -129,8 +126,6 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
         
     }
@@ -178,9 +173,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                     + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
     @Override
@@ -212,9 +206,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
     @Override
@@ -257,9 +250,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
     @Override
@@ -291,9 +283,8 @@ public class BookControllerImpl extends SystemImpl implements BookController {
                 et.rollback();
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
-        } finally{
-            GenericDAOImpl.close();
         }
+        
     }
 
 }
