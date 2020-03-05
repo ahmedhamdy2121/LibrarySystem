@@ -1,9 +1,13 @@
 package com.librarySystem.controller;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
 
+import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
+import com.librarySystem.entity.Address;
+import com.librarySystem.entity.CheckoutRecord;
 import com.librarySystem.entity.Member;
 
 /**
@@ -27,10 +31,18 @@ public class MemberControllerImpl extends LibrarySystemImpl
             throw new LibrarySystemException("Current logged user doen't have "
                     + "the privilege to execute this function");
         
+        
+        EntityTransaction et = GenericDAOImpl.getTransaction();
         try {
             et.begin();
 
             MemberDao mDao = new MemberDaoImpl();
+            
+            CheckoutRecord record = new CheckoutRecord();
+            record.setMember(member);
+            record.setTotalFine(0);
+            
+            member.setCheckoutRecord(record);
             Member updatedMember = mDao.add(member);
 
             et.commit();
@@ -60,6 +72,8 @@ public class MemberControllerImpl extends LibrarySystemImpl
                         == Privilege.BOTH.getValue())))
             throw new LibrarySystemException("Current logged user doen't have "
                     + "the privilege to execute this function");
+        
+        EntityTransaction et = GenericDAOImpl.getTransaction();
         
         try {
             et.begin();
@@ -94,11 +108,27 @@ public class MemberControllerImpl extends LibrarySystemImpl
             throw new LibrarySystemException("Current logged user doen't have "
                     + "the privilege to execute this function");
         
+        
+        EntityTransaction et = GenericDAOImpl.getTransaction();
         try {
             et.begin();
+            
 
             MemberDao mDao = new MemberDaoImpl();
-            Member updatedMember = mDao.update(member);
+            
+            
+            Member oldMember = mDao.getByIndex(member.getId());
+            Address oldAddress = member.getAddress();
+            oldMember.setPhoneNumber(member.getPhoneNumber());
+            oldAddress.setCity(member.getAddress().getCity());
+            oldAddress.setState(member.getAddress().getState());
+            oldAddress.setStreet(member.getAddress().getStreet());
+            oldAddress.setZip(member.getAddress().getZip());
+            oldMember.setPhoneNumber(member.getPhoneNumber());
+            
+            		
+            		
+            Member updatedMember = mDao.update(oldMember);
 
             et.commit();
             

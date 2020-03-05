@@ -1,6 +1,10 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
-import application.views.ViewManager;
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.BookController;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,10 +38,9 @@ public class AddBookCopyController {
 				view.showErrorAlert("Additional copies must be a number");
 			}
 			
-			try {
-				
-				// TODO call controller add book copy method
-				
+			try {				
+				BookController bookC = ControllerFactory.getController(Controller.Book);
+				bookC.addNewCopy(bookISBNTxt.getText(), Integer.parseInt(bookAdditionalCopiesTxt.getText()));
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}

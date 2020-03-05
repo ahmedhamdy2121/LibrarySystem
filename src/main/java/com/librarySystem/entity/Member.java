@@ -55,6 +55,13 @@ public class Member implements Serializable {
 		this.checkoutRecord = checkoutRecord;
 		this.bookCopy = bookCopy;
 	}
+	
+	public Member(String firstName, String lastName, String phoneNumber, Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
 
 	public long getId() {
 		return id;

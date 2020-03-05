@@ -1,7 +1,12 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
-import application.objectModel.Member;
-import application.views.ViewManager;
+import com.librarySystem.entity.Member;
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.controller.MemberController;
+import com.librarySystem.entity.Address;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -43,13 +48,14 @@ public class AddMemberController {
 				!memberCityTxt.getText().isEmpty() && !memberStateTxt.getText().isEmpty() && 
 				!memberZipCodeTxt.getText().isEmpty() && !memberPhoneNoTxt.getText().isEmpty()) {
 			
-			Member member = new Member(memberFirstNameTxt.getText(), memberLastNameTxt.getText(), memberAddressStreetTxt.getText(), memberCityTxt.getText(), 
-					memberStateTxt.getText(), memberZipCodeTxt.getText(), memberPhoneNoTxt.getText());
+			Address address = new Address(memberAddressStreetTxt.getText(), memberCityTxt.getText(), 
+					memberStateTxt.getText(), memberZipCodeTxt.getText());
 			
-			try {
-				
-				// TODO call controller method Add Member
-				
+			Member member = new Member(memberFirstNameTxt.getText(), memberLastNameTxt.getText(), memberPhoneNoTxt.getText(), address);
+			
+			try {				
+				MemberController memberC = ControllerFactory.getController(Controller.Member);
+				member = memberC.createMember(member);				
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}
@@ -61,7 +67,7 @@ public class AddMemberController {
 			memberStateTxt.setText("");
 			memberZipCodeTxt.setText("");
 			memberPhoneNoTxt.setText("");
-			view.showNoteAlert("Data Saved Successfully");
+			view.showNoteAlert("Member was created successfully with ID : " + member.getId());
 		}
 		else {
 			view.showErrorAlert("Member fields are mandatory...");

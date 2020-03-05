@@ -1,7 +1,12 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
-import application.objectModel.Member;
-import application.views.ViewManager;
+import com.librarySystem.entity.Address;
+import com.librarySystem.entity.Member;
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.controller.MemberController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,14 +50,12 @@ public class EditMemberController {
 	public void searchMember(ActionEvent event) throws Exception {
 		
 		ViewManager view = ViewManager.getInstance();
-		Member member = new Member("", "", "", "", "", "", "");
 		
 		if (!memberIdTxt.getText().isEmpty()) {
-			
+			Member member = null;
 			try {
-				
-				// TODO call controller method search for member
-				
+				MemberController memberC = ControllerFactory.getController(Controller.Member);
+				member = memberC.getMemberByID(Integer.parseInt(memberIdTxt.getText()));
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}
@@ -64,19 +67,19 @@ public class EditMemberController {
 			memberLastNameTxt.setText(member.getLastName());
 			
 			memberAddressStreetTxt.setDisable(false);
-			memberAddressStreetTxt.setText(member.getAddressStreet());
+			memberAddressStreetTxt.setText(member.getAddress().getStreet());
 			
 			memberCityTxt.setDisable(false);
-			memberCityTxt.setText(member.getCity());
+			memberCityTxt.setText(member.getAddress().getCity());
 			
 			memberStateTxt.setDisable(false);
-			memberStateTxt.setText(member.getState());
+			memberStateTxt.setText(member.getAddress().getState());
 			
 			memberZipCodeTxt.setDisable(false);
-			memberZipCodeTxt.setText(member.getZipCode());
+			memberZipCodeTxt.setText(member.getAddress().getZip());
 			
 			memberPhoneNoTxt.setDisable(false);
-			memberPhoneNoTxt.setText(member.getPhoneNo());
+			memberPhoneNoTxt.setText(member.getPhoneNumber());
 			
 			saveEditMemberBtn.setDisable(false);
 		}
@@ -95,12 +98,15 @@ public class EditMemberController {
 				!memberCityTxt.getText().isEmpty() && !memberStateTxt.getText().isEmpty() && 
 				!memberZipCodeTxt.getText().isEmpty() && !memberPhoneNoTxt.getText().isEmpty()) {
 			
-			Member member = new Member(memberFirstNameTxt.getText(), memberLastNameTxt.getText(), memberAddressStreetTxt.getText(), memberCityTxt.getText(), 
-					memberStateTxt.getText(), memberZipCodeTxt.getText(), memberPhoneNoTxt.getText());
+			Address address = new Address(memberAddressStreetTxt.getText(), memberCityTxt.getText(), 
+					memberStateTxt.getText(), memberZipCodeTxt.getText());
+			
+			Member member = new Member(memberFirstNameTxt.getText(), memberLastNameTxt.getText(), memberPhoneNoTxt.getText(), address);
 			
 			try {
 				
-				// TODO call controller method save member information
+				MemberController memberC = ControllerFactory.getController(Controller.Member);
+				memberC.editMember(member);
 				
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());

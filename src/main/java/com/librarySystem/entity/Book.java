@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "book")
@@ -46,6 +47,9 @@ public class Book implements Serializable {
 
 	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	List<BookCopy> bookCopyList;
+	
+	@Transient
+	int bookCopies;
 
 	public Book() {
 	}
@@ -56,6 +60,14 @@ public class Book implements Serializable {
 		this.authors = authors;
 		this.bookCopyList = bookCopyList;
 		this.borrowDuration = borrowDuration;
+	}
+
+	public Book(String title, String isbn, List<Author> authors, int bookCopies) {
+		this.title = title;
+		this.isbn = isbn;
+		this.authors = authors;
+		this.borrowDuration = 7;
+		this.bookCopies = bookCopies;
 	}
 
 	public long getId() {
@@ -110,11 +122,21 @@ public class Book implements Serializable {
 		this.borrowDuration = borrowDuration;
 	}
 
-    @Override
-    public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn
-                + ", borrowDuration=" + borrowDuration + ", authors=" + authors
-                + ", bookCopyList=" + bookCopyList + "]";
-    }
+	public int getBookCopies() {
+		return bookCopies;
+	}
+
+	public void setBookCopies(int bookCopies) {
+		this.bookCopies = bookCopies;
+	}
+	
+	
+
+//    @Override
+//    public String toString() {
+//        return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn
+//                + ", borrowDuration=" + borrowDuration + ", authors=" + authors
+//                + ", bookCopyList=" + bookCopyList + "]";
+//    }
 
 }

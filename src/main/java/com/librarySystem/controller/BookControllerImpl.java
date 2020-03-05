@@ -2,14 +2,17 @@ package com.librarySystem.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.RollbackException;
 
 import com.librarySystem.dao.BookDao;
 import com.librarySystem.dao.BookDaoImpl;
+import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.dao.MemberDao;
 import com.librarySystem.dao.MemberDaoImpl;
 import com.librarySystem.entity.Book;
@@ -37,6 +40,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
 
+		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
 			et.begin();
 
@@ -78,7 +82,11 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			cal.add(Calendar.DAY_OF_MONTH, book.getBorrowDuration());
 			entry.setDueDate(cal.getTime());
 
-			record.getCheckoutEntryList().add(entry);
+			if (record.getCheckoutEntryList() == null) {
+				record.setCheckoutEntryList(Arrays.asList(entry));
+			}else {
+				record.getCheckoutEntryList().add(entry);
+			}
 
 			mDao.update(member);
 			bDao.update(book);
@@ -87,7 +95,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 
 			return member;
 
-		} catch (IllegalStateException | RollbackException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			if (et != null)
 				et.rollback();
@@ -107,8 +115,9 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
 
+//		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
-			et.begin();
+//			et.begin();
 
 			MemberDao mDao = new MemberDaoImpl();
 			Member member = mDao.getByIndex(memberID);
@@ -116,13 +125,19 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			if (member == null)
 				throw new LibrarySystemException("Member not found");
 
-			et.commit();
-
+			System.out.println("///////////////////////////////////////"+ member.getCheckoutRecord().getCheckoutEntryList().size());
+			
+			for(CheckoutEntry entry : member.getCheckoutRecord().getCheckoutEntryList()){
+				System.out.println("///////////////////////////////////////"+ entry.getId());
+			}
+			
+//			et.commit();
 			return member;
 
 		} catch (Exception e) {
-			if (et != null)
-				et.rollback();
+			e.printStackTrace();
+//			if (et != null)
+//				et.rollback();
 			throw new LibrarySystemException("Error happened while dealing " + "with the database!");
 		}
 
@@ -139,6 +154,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
 
+		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
 			et.begin();
 
@@ -180,17 +196,30 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
 
+		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
 			et.begin();
 
 			BookDao mDao = new BookDaoImpl();
-			Book updatedBook = mDao.add(book);
+
+			List<BookCopy> copies = new ArrayList<>();
+			BookCopy copy;
+			for (int i = 0; i < book.getBookCopies(); i++) {
+				copy = new BookCopy();
+				copy.setAvailable(true);
+				copy.setBook(book);
+				copies.add(copy);
+			}
+
+			book.setBookCopyList(copies);
+			mDao.update(book);
 
 			et.commit();
 
-			return updatedBook;
+			return book;
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (et != null)
 				et.rollback();
 			throw new LibrarySystemException("Error happened while dealing " + "with the database!");
@@ -210,6 +239,8 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 				|| currentLoggedUser.getPermissions() == Privilege.BOTH.getValue())))
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
+
+		EntityTransaction et = GenericDAOImpl.getTransaction();
 
 		try {
 			et.begin();
@@ -247,6 +278,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			throw new LibrarySystemException(
 					"Current logged user doen't have " + "the privilege to execute this function");
 
+		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
 			et.begin();
 

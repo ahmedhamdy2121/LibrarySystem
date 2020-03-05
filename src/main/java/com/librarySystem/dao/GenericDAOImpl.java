@@ -12,10 +12,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("ls");
 	protected static EntityManager em = factory.createEntityManager();
-	private static EntityTransaction et = em.getTransaction();
+//	private static EntityTransaction et = em.getTransaction();
 
 	public static EntityTransaction getTransaction() {
-		return GenericDAOImpl.et;
+		return GenericDAOImpl. em.getTransaction();
 	}
 	
 	@Override

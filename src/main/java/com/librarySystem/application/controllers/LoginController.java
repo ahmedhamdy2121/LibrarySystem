@@ -1,6 +1,11 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
-import application.views.ViewManager;
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.controller.CredentialController;
+import com.librarySystem.entity.Person;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,20 +28,11 @@ public class LoginController {
 		String password = passwordTxt.getText();
 		
 		try {
-			
-			// TODO call controller for login method
-			
-			view.showTree(3, userName);
+			CredentialController loginC = ControllerFactory.getController(Controller.Credential);
+			Person person = loginC.login(userName, password);
+			view.showTree(person.getPermissions(), userName);
 		} catch (Exception e) {
 			view.showErrorAlert(e.getMessage());
-		}
-		
-		// TODO to be removed
-		if (userName.equals("mohamed") && password.equals("123456")) {
-			view.showTree(3, userName);
-		}
-		else {
-			view.showErrorAlert("Invalid Login");
 		}
 	}
 	

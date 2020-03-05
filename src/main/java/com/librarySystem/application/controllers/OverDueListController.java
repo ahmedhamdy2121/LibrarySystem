@@ -1,13 +1,16 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import application.objectModel.BookCopy;
-import application.objectModel.BookOverdueList;
-import application.views.ViewManager;
+import com.librarySystem.application.dto.BookOverdueList;
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.BookController;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.entity.BookCopy;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,9 +61,10 @@ public class OverDueListController {
 			try {
 				List<BookCopy> bookCopies = new ArrayList<BookCopy>();
 				
-				// TODO call controller method search for check outs
+				BookController bookC = ControllerFactory.getController(Controller.Book);
+				bookCopies = bookC.getBookOverdueCopies(bookISBNTxt.getText());
 				
-				//if (bookCopies.size() != 0) {
+				if (bookCopies.size() != 0) {
 					bookCopyNoColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("copyNumber"));
 					memberIdColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("memberId"));
 					firstNameColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("firstName"));
@@ -68,10 +72,10 @@ public class OverDueListController {
 					dueDateColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, LocalDate>("dueDate"));
 					
 					tableView.setItems(getOverdueList(bookCopies));
-				/*}
+				}
 				else {
 					view.showErrorAlert("No Data found for the given ISBN");
-				}*/
+				}
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}
@@ -90,24 +94,23 @@ public class OverDueListController {
 		// TODO the below line to be removed
 		bookTitleTxt.setText("Book Title");
 		
-		/*
 		bookTitleTxt.setText(bookCopies.get(0).getBook().getTitle());
 		
 		for (BookCopy copy : bookCopies) {
 			BookOverdueList bookOverdue = 
-					new BookOverdueList(copy.getCopyNumber(), copy.getMember().getMemberId(), 
+					new BookOverdueList(copy.getId(), copy.getMember().getId(), 
 					copy.getMember().getFirstName(), copy.getMember().getLastName(), copy.getDueDate());
 			
 			bookOverdueList.add(bookOverdue);
 		}
-		*/
+		/*
 		// TODO the below for loop will be removed
 		for (int i=0; i<5; i++) {
 			long val1 = 12345;
 			long val2 = 6789;
 			BookOverdueList bookOverdue = new BookOverdueList(val1, val2, "Mohamed", "ElSayed", new Date());
 			bookOverdueList.add(bookOverdue);
-		}
+		}*/
 		return bookOverdueList;
 	}
 	

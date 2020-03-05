@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SearchMemberCheckoutsController">
+<AnchorPane prefHeight="900.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.librarySystem.application.controllers.SearchMemberCheckoutsController">
    <children>
       <GridPane prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #5e5959;">
         <columnConstraints>

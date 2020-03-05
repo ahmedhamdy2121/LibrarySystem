@@ -1,4 +1,4 @@
-package application.views;
+package com.librarySystem.application.views;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ public class ViewManager {
 	private int userPermission;
 	private Stage stage;
 	private static ViewManager viewInstance = null; 
-	private String applicationCSS = "/application/application.css";
+	private String applicationCSS = "/com/librarySystem/application/application.css";
 	  
     private ViewManager() { 
         this.setStage(new Stage());
@@ -139,11 +139,11 @@ public class ViewManager {
 		else if (permission == 2) {
 			TreeItem<String> checkOut, query; 
 			checkOut = makeTreeBranch("Check Out", treeRoot);
-			makeTreeBranch("Check a Book", checkOut);
+			makeTreeBranch("Checkout a Book", checkOut);
 			
 			query = makeTreeBranch("Query Members", treeRoot);
 			makeTreeBranch("Search for member checkouts", query);
-			makeTreeBranch("Check for overdue book copy", query);
+			makeTreeBranch("Checkout for overdue book copy", query);
 		}
 		// case of Both 
 		else if (permission == 3) {
@@ -170,7 +170,7 @@ public class ViewManager {
 		
 		if (treeAction.equals("Add New Book")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/AddBook.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/AddBook.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -183,7 +183,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Add Book Copy")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/AddBookCopy.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/AddBookCopy.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -196,7 +196,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Add New Member")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/AddMember.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/AddMember.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -209,7 +209,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Edit Member Information")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/EditMember.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/EditMember.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -222,7 +222,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Checkout a Book")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/CheckOutBook.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/CheckOutBook.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -235,7 +235,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Search for member checkouts")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/SearchMemberCheckouts.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/SearchMemberCheckouts.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());
@@ -248,7 +248,7 @@ public class ViewManager {
 		}
 		else if (treeAction.equals("Checkout for overdue book copy")) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/views/OverDueList.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/com/librarySystem/application/views/OverDueList.fxml"));
 				Scene scene = new Scene(root);
 				this.stage.setTitle("Library System");
 				scene.getStylesheets().add(getClass().getResource(this.applicationCSS).toExternalForm());

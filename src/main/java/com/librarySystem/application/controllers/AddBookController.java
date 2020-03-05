@@ -1,14 +1,24 @@
-package application.controllers;
+package com.librarySystem.application.controllers;
 
-import application.objectModel.Author;
-import application.objectModel.Book;
-import application.views.ViewManager;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.librarySystem.application.views.ViewManager;
+import com.librarySystem.controller.BookController;
+import com.librarySystem.controller.Controller;
+import com.librarySystem.controller.ControllerFactory;
+import com.librarySystem.entity.Address;
+import com.librarySystem.entity.Author;
+import com.librarySystem.entity.Book;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class AddBookController {
+	
+	private List<Author> authorsList;
 	
 	@FXML
 	private Button addAutherBtn;
@@ -51,6 +61,7 @@ public class AddBookController {
 	
 	public void BackAction(ActionEvent event) throws Exception {
 		ViewManager view = ViewManager.getInstance();
+		this.authorsList.clear();
 		view.showTree(0, "");
 	}
 	
@@ -60,6 +71,7 @@ public class AddBookController {
 		if (!bookTitleTxt.getText().isEmpty() && !bookISBNTxt.getText().isEmpty() && !bookAvailableTxt.getText().isEmpty()) {
 			try {
 				Integer.parseInt(bookAvailableTxt.getText());
+				this.authorsList = new ArrayList<Author>();
 				autherFirstNameTxt.setDisable(false);
 				autherLastNameTxt.setDisable(false);
 				autherAddressStreetTxt.setDisable(false);
@@ -89,15 +101,18 @@ public class AddBookController {
 			bookTitleTxt.setDisable(true);
 			bookISBNTxt.setDisable(true);
 			bookAvailableTxt.setDisable(true);
+
+			Address address = new Address(autherAddressStreetTxt.getText(), autherCityTxt.getText(), 
+					autherStateTxt.getText(), autherZipCodeTxt.getText());
 			
-			Book book = new Book(bookTitleTxt.getText(), bookISBNTxt.getText(), Integer.parseInt(bookAvailableTxt.getText()));
-			Author author = new Author(autherFirstNameTxt.getText(), autherLastNameTxt.getText(), autherAddressStreetTxt.getText(), autherCityTxt.getText(), 
-						autherStateTxt.getText(), autherZipCodeTxt.getText(), autherPhoneNoTxt.getText(), autherShortBioTxt.getText());
+			Author author = new Author(autherFirstNameTxt.getText(), autherLastNameTxt.getText(), autherPhoneNoTxt.getText(), 
+					autherShortBioTxt.getText(), address);
 			
+			this.authorsList.add(author);
+			Book book = new Book(bookTitleTxt.getText(), bookISBNTxt.getText(), authorsList, Integer.parseInt(bookAvailableTxt.getText()));
 			try {
-				
-				// TODO call controller method Add Book
-				
+				BookController bookC = ControllerFactory.getController(Controller.Book);
+				bookC.addNewBook(book);		
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}
