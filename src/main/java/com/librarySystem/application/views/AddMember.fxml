@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AddMemberController">
+   <children>
+      <GridPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #5e5959;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.60003662109375" minWidth="10.0" prefWidth="181.40003662109376" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="496.79997558593743" minWidth="10.0" prefWidth="418.19996337890626" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="227.8000244140625" minHeight="10.0" prefHeight="102.80000000000001" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="432.59999504089353" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="638.8" minHeight="10.0" prefHeight="412.8" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" prefHeight="107.0" prefWidth="626.0" text="Add New Member" textFill="WHITE" GridPane.columnSpan="2147483647">
+               <font>
+                  <Font name="System Bold Italic" size="30.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" prefHeight="27.0" prefWidth="218.0" text="First Name" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="320.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="TOP_LEFT" text="Last Name" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="240.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Address Street" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="160.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="TOP_LEFT" text="City" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="80.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="TOP_LEFT" text="State" textFill="WHITE" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" text="ZIP Code" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="-80.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Phone Number" textFill="#fdfdfd" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="-160.0" left="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="memberFirstNameTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="320.0" right="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="memberLastNameTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="240.0" right="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="memberAddressStreetTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="160.0" right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="memberCityTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="80.0" right="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="memberStateTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="memberZipCodeTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="-80.0" right="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="memberPhoneNoTxt" alignment="TOP_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="-160.0" right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="saveAddMemberBtn" mnemonicParsing="false" onAction="#saveAddMember" prefHeight="39.0" prefWidth="124.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="-300.0" left="271.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#BackAction" prefHeight="39.0" prefWidth="124.0" text="Back" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="-300.0" left="20.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
