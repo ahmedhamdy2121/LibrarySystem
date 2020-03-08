@@ -8,7 +8,6 @@ import java.util.List;
 import com.librarySystem.application.dto.BookCheckOutEntries;
 import com.librarySystem.entity.BookCopy;
 import com.librarySystem.entity.CheckoutEntry;
-import com.librarySystem.entity.CheckoutRecord;
 import com.librarySystem.entity.Member;
 import com.librarySystem.application.views.ViewManager;
 import com.librarySystem.controller.BookController;
@@ -117,17 +116,20 @@ public class SearchMemberCheckoutsController {
 		ObservableList<BookCheckOutEntries> bookEntries = FXCollections.observableArrayList();
 		bookEntriesList = new ArrayList<BookCheckOutEntries>();
 
-		System.out.println(member.getCheckoutRecord().getCheckoutEntryList().size());
-		for (CheckoutEntry entry : member.getCheckoutRecord().getCheckoutEntryList()) {
-			System.out.println("=================================>" + entry.getDueDate()+", "+ entry.getReturnDate());
+		//for (CheckoutEntry entry : member.getCheckoutRecord().getCheckoutEntryList()) {
+		for (int i =0; i<member.getCheckoutRecord().getCheckoutEntryList().size(); i+=2) {	
+			CheckoutEntry entry = member.getCheckoutRecord().getCheckoutEntryList().get(i);
 			BookCopy copy = entry.getBookCopy();
 			
+			Date returnDate = new Date();
+			if (entry.getReturnDate() == null)
+				returnDate = entry.getDueDate();
+			else
+				returnDate = entry.getReturnDate();
+				
 			BookCheckOutEntries bookCheckOutEntry = new BookCheckOutEntries(
 					copy.getBook().getTitle(), copy.getBook().getIsbn(),
-					entry.getCheckoutDate(), entry.getDueDate(), new Date());
-			
-			
-			System.out.println("=================================>");
+					entry.getCheckoutDate(), entry.getDueDate(), returnDate);
 			
 			bookEntries.add(bookCheckOutEntry);
 			bookEntriesList.add(bookCheckOutEntry);

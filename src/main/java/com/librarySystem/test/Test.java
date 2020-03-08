@@ -35,12 +35,12 @@ public class Test {
 	public static void main(String[] args) throws LibrarySystemException {
 		Test t = new Test();
 
-//		t.createUsers();
-//		t.createBooks();
-//		t.createMembers();
+		t.createUsers();
+		t.createBooks();
+		t.createMembers();
 
-		t.testLogin();
-		t.testCheckoutBook();
+//		t.testLogin();
+//		t.testCheckoutBook();
 		// t.testHibernate();
 	}
 

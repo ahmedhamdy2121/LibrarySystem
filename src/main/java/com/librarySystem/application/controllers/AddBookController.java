@@ -1,6 +1,7 @@
 package com.librarySystem.application.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.librarySystem.application.views.ViewManager;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 public class AddBookController {
 	
 	private List<Author> authorsList;
+	private Book book;
 	
 	@FXML
 	private Button addAutherBtn;
@@ -72,6 +74,7 @@ public class AddBookController {
 			try {
 				Integer.parseInt(bookAvailableTxt.getText());
 				this.authorsList = new ArrayList<Author>();
+				this.book = new Book(bookTitleTxt.getText(), bookISBNTxt.getText(), this.authorsList, Integer.parseInt(bookAvailableTxt.getText()));
 				autherFirstNameTxt.setDisable(false);
 				autherLastNameTxt.setDisable(false);
 				autherAddressStreetTxt.setDisable(false);
@@ -108,11 +111,16 @@ public class AddBookController {
 			Author author = new Author(autherFirstNameTxt.getText(), autherLastNameTxt.getText(), autherPhoneNoTxt.getText(), 
 					autherShortBioTxt.getText(), address);
 			
+			author.setBooks(Arrays.asList(book));
+			
 			this.authorsList.add(author);
-			Book book = new Book(bookTitleTxt.getText(), bookISBNTxt.getText(), authorsList, Integer.parseInt(bookAvailableTxt.getText()));
+			this.book.setAuthors(this.authorsList);
+//			this.book.getAuthors().add(author);
+			//Book book = new Book(bookTitleTxt.getText(), bookISBNTxt.getText(), authorsList, Integer.parseInt(bookAvailableTxt.getText()));
 			try {
 				BookController bookC = ControllerFactory.getController(Controller.Book);
-				bookC.addNewBook(book);		
+				this.book = bookC.addNewBook(this.book);	
+				System.out.println("////////////////////////// " + this.book.getId());
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());
 			}

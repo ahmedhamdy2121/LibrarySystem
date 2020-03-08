@@ -64,7 +64,7 @@ public class OverDueListController {
 				BookController bookC = ControllerFactory.getController(Controller.Book);
 				bookCopies = bookC.getBookOverdueCopies(bookISBNTxt.getText());
 				
-				if (bookCopies.size() != 0) {
+				if (bookCopies != null && !bookCopies.isEmpty()) {
 					bookCopyNoColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("copyNumber"));
 					memberIdColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("memberId"));
 					firstNameColumn.setCellValueFactory(new PropertyValueFactory<BookOverdueList, String>("firstName"));
@@ -74,7 +74,7 @@ public class OverDueListController {
 					tableView.setItems(getOverdueList(bookCopies));
 				}
 				else {
-					view.showErrorAlert("No Data found for the given ISBN");
+					view.showErrorAlert("No Overdue List Found");
 				}
 			} catch (Exception e) {
 				view.showErrorAlert(e.getMessage());

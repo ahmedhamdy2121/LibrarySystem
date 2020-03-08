@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "book")
 public class Book implements Serializable {
@@ -34,13 +36,14 @@ public class Book implements Serializable {
 	@Column(name = "title")
 	private String title;
 
+	@NotNull
 	@Column(name = "isbn", unique = true)
 	String isbn;
 	
 	@Column(name = "borrow_duration")
 	int borrowDuration;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "book_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "author_id") })
 	List<Author> authors;

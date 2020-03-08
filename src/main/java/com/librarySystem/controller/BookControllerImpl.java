@@ -56,6 +56,9 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 				throw new LibrarySystemException("Book not found");
 
 			CheckoutRecord record = member.getCheckoutRecord();
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DAY_OF_MONTH, book.getBorrowDuration());
 
 			// check if there is available copies
 			List<BookCopy> bookCopies = book.getBookCopyList();
@@ -64,6 +67,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 				if (copy.isAvailable()) {
 					copy.setAvailable(false);
 					copy.setMember(member);
+					copy.setDueDate(cal.getTime());
 					bookCopy = copy;
 					break;
 				}
@@ -77,9 +81,6 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			entry.setCheckoutRecord(record);
 			entry.setBookCopy(bookCopy);
 			entry.setFine(0);
-
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DAY_OF_MONTH, book.getBorrowDuration());
 			entry.setDueDate(cal.getTime());
 
 			if (record.getCheckoutEntryList() == null) {
@@ -178,6 +179,7 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			return overDueBookCopies;
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			if (et != null)
 				et.rollback();
 			throw new LibrarySystemException("Error happened while dealing " + "with the database!");
@@ -199,9 +201,11 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 		EntityTransaction et = GenericDAOImpl.getTransaction();
 		try {
 			et.begin();
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+ book.getId());
 
-			BookDao mDao = new BookDaoImpl();
-
+			BookDao bDao = new BookDaoImpl();
+			
 			List<BookCopy> copies = new ArrayList<>();
 			BookCopy copy;
 			for (int i = 0; i < book.getBookCopies(); i++) {
@@ -212,8 +216,8 @@ public class BookControllerImpl extends LibrarySystemImpl implements BookControl
 			}
 
 			book.setBookCopyList(copies);
-			mDao.update(book);
-
+			book = bDao.update(book);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "+ book.getId());
 			et.commit();
 
 			return book;
