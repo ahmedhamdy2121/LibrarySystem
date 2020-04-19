@@ -7,6 +7,6 @@ A library management system (**this project is not for commercial usage or any u
 The reset of the diagrams (class diagrams. sequence diagrams and use cases) are in the diagrams folder.
 
 ## Features
-1. Hibernate is used manage the backend.
+1. Hibernate is used to manage the backend.
 2. Used double layer security (Frontend and Backend).
 3. Used generic factory function.
