@@ -74,7 +74,6 @@ public class MemberControllerImpl extends LibrarySystemImpl
                     + "the privilege to execute this function");
         
         EntityTransaction et = GenericDAOImpl.getTransaction();
-        
         try {
             et.begin();
 
@@ -108,14 +107,11 @@ public class MemberControllerImpl extends LibrarySystemImpl
             throw new LibrarySystemException("Current logged user doen't have "
                     + "the privilege to execute this function");
         
-        
         EntityTransaction et = GenericDAOImpl.getTransaction();
         try {
             et.begin();
             
-
             MemberDao mDao = new MemberDaoImpl();
-            
             
             Member oldMember = mDao.getByIndex(member.getId());
             Address oldAddress = member.getAddress();
@@ -125,8 +121,6 @@ public class MemberControllerImpl extends LibrarySystemImpl
             oldAddress.setStreet(member.getAddress().getStreet());
             oldAddress.setZip(member.getAddress().getZip());
             oldMember.setPhoneNumber(member.getPhoneNumber());
-            
-            		
             		
             Member updatedMember = mDao.update(oldMember);
 
@@ -140,7 +134,5 @@ public class MemberControllerImpl extends LibrarySystemImpl
             throw new LibrarySystemException("Error happened while dealing "
                             + "with the database!");
         }
-        
     }
-
 }

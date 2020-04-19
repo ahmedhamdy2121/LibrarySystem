@@ -1,8 +1,5 @@
 package com.librarySystem.controller;
 
-import javax.persistence.EntityTransaction;
-
-import com.librarySystem.dao.GenericDAOImpl;
 import com.librarySystem.entity.Person;
 
 /**
@@ -12,7 +9,6 @@ import com.librarySystem.entity.Person;
 public abstract class LibrarySystemImpl implements LibrarySystem {
     
 	protected static Person currentLoggedUser;
-//	protected EntityTransaction et = GenericDAOImpl.getTransaction();
 	
     public Privilege getPermission() {
         if (currentLoggedUser == null)
